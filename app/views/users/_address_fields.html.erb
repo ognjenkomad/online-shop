@@ -1,0 +1,31 @@
+<div class="fields">
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <%= f.label :street %>
+      <%= f.text_field :street, required: true, id: :address_street, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :street_number %>
+      <%= f.number_field :street_number, required: true, id: :address_street_number, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= f.label :town %>
+      <%= f.text_field :town, required: true, id: :address_town, class: 'form-control' %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :state %>
+      <%= f.text_field :state, required: true, id: :address_state, class: 'form-control' %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :post_code %>
+      <%= f.number_field :post_code, required: true, id: :address_post_code, class: 'form-control' %>
+    </div>
+  </div>
+
+  <%= f.hidden_field(:_destroy) %>
+  <%= link_to 'Remove address', 'javascript:void(0);', class: 'remove-link btn btn-danger mb-3' %>
+</div>

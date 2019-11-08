@@ -1,0 +1,11 @@
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+/docs/*
+!/log/.keep
+!/tmp/.keep
+# Ignore .idea files
+.idea/
+
+# Ignore redis files
+dump.rdb

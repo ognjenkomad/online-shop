@@ -1,0 +1,63 @@
+<%= form_with(model: user, local: true, html: { class: 'needs-validation'}) do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation" class="invalid-feedback">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= f.label :last_name %>
+          <%= f.text_field :first_name, required: true, id: :user_first_name, class: 'form-control' %>
+        </div> 
+
+        <div class="col-md-6 mb-3">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, required: true, id: :user_last_name, class: 'form-control' %>
+        </div> 
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <%= f.label :email %>
+          <%= f.text_field :email, required: true, id: :user_email, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= f.label :password %>
+          <%= f.password_field :password, id: :user_password, class: 'form-control' %>
+        </div> 
+
+        <div class="col-md-6 mb-3">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, id: :user_password_confirmation, class: 'form-control' %>
+        </div> 
+      </div>
+        <% if action == 'new' %>
+          <%= f.submit 'Signup', class: "btn btn-primary" %>
+        <% else %>
+          <%= f.submit 'Save', class: "btn btn-warning" %>
+        <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="fields-container">
+        <%= f.fields_for :addresses do |builder|%>
+          <%= render 'address_fields', f: builder %>
+        <% end %>
+      </div>
+        <%= link_to_add_fields 'Add More Addresses', f, :addresses  %> 
+    </div>
+  </div>
+<% end %>
+

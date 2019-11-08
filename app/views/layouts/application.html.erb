@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OnlineShop</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css">
+  </head>
+
+  <body>
+    <div class="container">
+    <%= render  "layouts/partials/header" %>
+    <%= render  "layouts/partials/messages" %>
+    <%= yield %>
+    </div> 
+  </body>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: true %>
+</html>

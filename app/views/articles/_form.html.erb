@@ -1,0 +1,36 @@
+<%= form_with(model: article, local: true) do |form| %>
+  <div class="row">
+    <div class="col-md-8 mb-3">
+      <h1><%= title %></h1>
+    </div>
+    <div class="col-md-2">
+      <%= form.submit class: 'btn btn-warning' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 mb-3">
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :article_name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-8 mb-3">
+      <%= form.label :description %>
+      <%= form.text_area :description, id: :article_description, cols: 10, rows: 10, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-8 mb-3">
+      <%= form.label :price %>
+      <%= form.number_field :price, id: :article_price, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-8 mb-3">
+      <%= form.label :image_url %>
+      <%= form.text_field :image_url, id: :article_image_url, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-8 mb-3">
+      <%= form.label :weight %>
+      <%= form.text_field :weight, id: :article_weight, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

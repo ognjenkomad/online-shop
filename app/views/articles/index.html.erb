@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-11">
+    <h1>Articles</h1>
+  </div>
+  <div class="col-md-1">
+      <% if current_user.admin %>
+        <%= link_to 'New', new_article_path, class: 'btn btn-primary' %>
+      <% end %>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-7 mb-3">
+    <%= text_field_tag :search, params[:search], placeholder: "Search Articles", class: "form-control" %>
+    <button id="clear-sarch" disabled><i class="fa fa-minus-circle"></i></button>
+  </div>
+  <div class="col-md-2">
+    <%= number_field_tag :min_value, params[:min_value], placeholder: "Min $", class: "form-control" %>
+  </div>
+  <div class="col-md-2">
+    <%= number_field_tag :max_value, params[:max_value], placeholder: "Max $", class: "form-control" %>
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-warning refresh-page pull-right">Refresh</button>
+  </div> 
+</div>
+<div id="articles-container">
+  <div class="row">
+    <% @articles.each do |article| %>
+      <div class="col-md-3 mb-5">
+        <div class="product-top text-center">
+          <%= image_tag article.image_url %>
+          <div class="overlay">
+            <button type="button" class="btn btn-secondary" title="Quick Shop"><%= link_to '', article_path(article), class: 'fa fa-eye' %></button>
+            <% if !current_user.admin %>
+              <button type="button" class="btn btn-secondary" title="Add to Card"><%= link_to '', add_to_cart_article_path(article), method: :post, class: 'fa fa-shopping-cart' %></button>
+            <% end %>
+            <% if current_user.admin? %>
+              <button type="button" class="btn btn-secondary" title="Edit Article"><%= link_to '', edit_article_path(article), class: 'edit-icon fa fa-edit' %></button>
+              <button type="button" class="btn btn-secondary" title="Delete article"><%= link_to '', article_path(article), method: :delete, class: 'delete-icon fa fa-trash' %></button>
+            <% end %>
+
+          </div>
+        </div>
+        <div class="product-bottom text-center">
+          <h3><%= link_to article.name, article_path(article) %></h3>
+          <h5><%= article.price %></h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-12 text-center">
+      <%= will_paginate @articles, renderer: WillPaginate::ActionView::BootstrapLinkRenderer  %>
+    </div>
+  </div>
+</div>
+
+"user"=>{"first_name"=>"Janko", 
+"last_name"=>"Jankovic", 
+"email"=>"janko@gmail.com", 
+"password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", 
+"addresses_attributes"=>{"0"=>{"street"=>"Hilandarska", "street_number"=>"2", "town"=>"Istocno Sarajevo", "state"=>"Republika Srpska", "post_code"=>"78931", "_destroy"=>"false", "id"=>"ca73b96f-eaa3-4176-9ccf-9bf7903efa2c"}, "1"=>{"id"=>"47148118-4e4e-4508-869f-aea5340e0f3b"}, "2"=>{"id"=>"9e87ccef-9f62-42ac-a5b1-a83be9e5f1b5"}}

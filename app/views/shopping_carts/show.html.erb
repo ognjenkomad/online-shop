@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+
+  <% if @shopping_cart_articles.count > 0 %>
+    <strong>Articles for purchase</strong>
+  <% else %>
+    <strong>Your cart is empty!</strong>
+  <% end %>
+</p>
+<div class="row mb-3">
+    <div class="col-md-6 text-center">
+       <h6>Product</h6>
+    </div>
+    <div class="col-md-1 text-center">
+      <h6>Weight</h6>
+    </div>
+    <div class="col-md-1 text-center">
+      <h6>Price</h6>
+    </div>
+    <div class="col-md-1 text-center">
+      <h6 class="float-left">Quantity</h6>
+    </div>
+    <div class="col-md-1 text-center">
+    </div>
+    <div class="col-md-2">
+      <h6 class="float-right">Total Price </h6>
+    </div>
+</div>
+<% @shopping_cart_articles.each do |sp_articles| %>
+  <div class="row cart-item">
+    <div class="col-md-2">
+      <%= image_tag sp_articles.article.image_url, class: 'product-image' %>
+    </div>
+    <div class="col-md-4">
+      <h5><%= link_to sp_articles.article.name, article_path(sp_articles.article) %></h5>
+      <p><%= sp_articles.article.description.truncate(100) %></p>
+    </div>
+    <div class="col-md-1">
+      <p><%= sp_articles.article.weight %> kg</p>
+    </div>
+    <div class="col-md-1">
+      <p><%= sp_articles.article.price %>$</p>
+    </div>
+    <div class="col-md-1">
+      <% if sp_articles.quantity > 1 %> 
+        <%= link_to '-', decrease_from_cart_article_path(sp_articles.article), method: :post %>
+      <% end %>
+      <p class="d-inline"><%= sp_articles.quantity %></p>
+      <%= link_to '+', add_to_cart_article_path(sp_articles.article), method: :post %>
+    </div>
+    <div class="col-md-1">
+      <%= link_to "Remove", remove_from_cart_article_path(sp_articles.article), method: :delete, class: 'btn btn-warning' %>
+    </div>
+    <div class="col-md-2">
+      <p class="float-right"><%= sp_articles.article.price * sp_articles.quantity %></p>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-12">
+   <% if @shopping_cart_articles.count > 0 %>
+    <p class="float-right">
+    <strong>Total price:</strong>
+      <%= @total_price %>
+    </p>
+    <% end %>
+  </div>
+</div>
+
+<%= form_tag(orders_path(current_user), method: :post) do |f| %>
+<div class="row">
+  <div class="col-md-11">
+    <%= select_tag :address_id, options_for_select(current_user.addresses.all.collect { |address| [address.state + ', ' + address.town  + " (#{address.post_code}), "  + address.street + ' ' + address.street_number.to_s, address.id] }, current_user.addresses),  class: 'select-tag form-control' %>
+  </div>
+  <div class="col-md-1">
+    <% if @shopping_cart_articles.count > 0 %>
+      <%= submit_tag 'Order', class:"btn btn-primary" %>
+    <% else %>
+      <%= submit_tag 'Order', disabled: true, class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+

@@ -1,0 +1,22 @@
+<p>Thank for ordering</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Weight</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+  <% @order.order_articles.each do |order_article| %>
+    <tr>
+      <td><%= order_article.article.name %></td>
+      <td><%= order_article.article.description.truncate(100) %></td>
+      <td><%= order_article.article.weight %></td>
+      <td><%= order_article.quantity %></td>
+      <td><%= order_article.total_price %>$</td>
+    </tr>
+  <% end %>
+</table>
+<h2>Your tota price: <%= @order.total_price %>$</h2>
+<h4>Order sent to</h4>
+<p><%= @order.address.state + ', ' + @order.address.town  + " (#{@order.address.post_code}), "  + @order.address.street + ' ' + @order.address.street_number.to_s %></p>
