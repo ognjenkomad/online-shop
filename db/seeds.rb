@@ -6,9 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+user = User.find_or_create_by(email: "admin@onlineshop.com", first_name: 'Admin', last_name: 'Admin') do |user|
+  user.password = 'admin123'
+  user.password_confirmation = 'admin123'
+end
 
-user = User.where(admin: true).take
-
+user.save
 
 user.addresses.find_or_create_by(street: 'Spasovdanska', street_number: 23, town: 'Istocno Sarajevo', state: 'Republika Srpska', post_code: 77831)
 

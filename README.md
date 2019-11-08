@@ -11,16 +11,20 @@ Things you may want to cover:
   rails 5.1.7
 * System dependencies
 
-* Configuration
+* Setup Gems
+
+`gem install bundler`
+
+`bundle install`
 
 * Database creation
 
+`rake db:setup`
+
 * Database initialization
 
-* How to run the test suite
+`rake db:seed`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Login with admin
+email: admin@onlineshop.com
+password: admin123
