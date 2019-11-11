@@ -13,5 +13,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  accepts_nested_attributes_for :addresses, allow_destroy: true
+  accepts_nested_attributes_for :addresses,
+                                :reject_if => proc { |address| address['street'].blank? },
+                                allow_destroy: true
 end

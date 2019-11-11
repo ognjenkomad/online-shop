@@ -109,8 +109,8 @@ function initAddAddresses() {
 function removeFields() {
   var addressFieldsCount = $('.fields').length
   if(addressFieldsCount > 1) {
-    $(this).prev('input[type=hidden]').value = 1
-    $(this).parent('.fields').remove()
+    $(this).prev('input[type=hidden]').val(1)
+    $(this).parent('.fields').hide()
   } else {
     alert('You must have at least one address!')
   }
